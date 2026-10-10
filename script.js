@@ -1,162 +1,144 @@
 (() => {
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const shell = document.querySelector('.nav-shell');
-  const glow = document.querySelector('.cursor-glow');
+  const header = document.querySelector('.site-header');
+  const pointer = document.querySelector('.pointer-light');
 
-  const onScroll = () => {
-    if (shell) shell.classList.toggle('scrolled', window.scrollY > 24);
+  const updateHeader = () => {
+    if (header) header.classList.toggle('scrolled', window.scrollY > 20);
   };
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
+  updateHeader();
+  window.addEventListener('scroll', updateHeader, { passive: true });
 
-  if (glow && !reduceMotion) {
-    window.addEventListener('pointermove', (e) => {
-      glow.style.left = e.clientX + 'px';
-      glow.style.top = e.clientY + 'px';
+  if (pointer && !reduced) {
+    window.addEventListener('pointermove', (event) => {
+      pointer.style.left = event.clientX + 'px';
+      pointer.style.top = event.clientY + 'px';
     }, { passive: true });
   }
 
-  const reveals = [...document.querySelectorAll('.reveal')];
-  if ('IntersectionObserver' in window && !reduceMotion) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -35px 0px' });
-    reveals.forEach((el) => io.observe(el));
+  const revealNodes = [...document.querySelectorAll('.reveal')];
+  if (!reduced && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    }, { threshold: 0.1, rootMargin: '0px 0px -28px 0px' });
+    revealNodes.forEach((node) => observer.observe(node));
   } else {
-    reveals.forEach((el) => el.classList.add('visible'));
+    revealNodes.forEach((node) => node.classList.add('visible'));
   }
 
-  const canvas = document.getElementById('riskField');
+  const canvas = document.getElementById('field');
   if (!canvas) return;
   const ctx = canvas.getContext('2d', { alpha: true });
 
   let width = 0;
   let height = 0;
-  let ratio = Math.min(window.devicePixelRatio || 1, 2);
-  let nodes = [];
-  let mouse = { x: -9999, y: -9999 };
+  let dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let points = [];
+  let cursor = { x: -10000, y: -10000 };
 
-  function resize() {
+  function setup() {
     const rect = canvas.getBoundingClientRect();
     width = rect.width;
     height = rect.height;
-    canvas.width = Math.floor(width * ratio);
-    canvas.height = Math.floor(height * ratio);
-    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.max(1, Math.floor(width * dpr));
+    canvas.height = Math.max(1, Math.floor(height * dpr));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const count = Math.max(32, Math.floor((width * height) / 11000));
-    nodes = Array.from({ length: count }, (_, i) => {
-      const ring = i % 5;
-      const angle = (i / count) * Math.PI * 2 + ring * 0.41;
-      const radius = 90 + (i % 11) * 16 + ring * 8;
+    const count = Math.max(34, Math.floor((width * height) / 10500));
+    points = Array.from({ length: count }, (_, index) => {
+      const angle = (index / count) * Math.PI * 2 + (index % 6) * 0.21;
+      const shell = 78 + (index % 13) * 13;
+      const x = width * 0.51 + Math.cos(angle) * shell;
+      const y = height * 0.50 + Math.sin(angle) * shell * 0.73;
       return {
-        x: width * 0.5 + Math.cos(angle) * radius,
-        y: height * 0.48 + Math.sin(angle) * radius * 0.72,
-        ox: width * 0.5 + Math.cos(angle) * radius,
-        oy: height * 0.48 + Math.sin(angle) * radius * 0.72,
-        vx: Math.cos(angle + 1.7) * 0.07,
-        vy: Math.sin(angle + 1.7) * 0.05,
-        r: i % 9 === 0 ? 2.2 : 1.15
+        x, y, homeX: x, homeY: y,
+        vx: Math.cos(angle + 1.25) * 0.055,
+        vy: Math.sin(angle + 1.25) * 0.045,
+        radius: index % 11 === 0 ? 2.1 : 1.05,
+        hot: index % 11 === 0
       };
     });
   }
 
-  function draw(time = 0) {
+  function render(time = 0) {
     ctx.clearRect(0, 0, width, height);
 
-    for (let i = 0; i < nodes.length; i++) {
-      const a = nodes[i];
-      if (!reduceMotion) {
-        a.x += a.vx;
-        a.y += a.vy;
-        if (Math.abs(a.x - a.ox) > 12) a.vx *= -1;
-        if (Math.abs(a.y - a.oy) > 12) a.vy *= -1;
+    for (let i = 0; i < points.length; i++) {
+      const point = points[i];
 
-        const dx = mouse.x - a.x;
-        const dy = mouse.y - a.y;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 120) {
-          a.x -= dx * 0.0007;
-          a.y -= dy * 0.0007;
+      if (!reduced) {
+        point.x += point.vx;
+        point.y += point.vy;
+        if (Math.abs(point.x - point.homeX) > 11) point.vx *= -1;
+        if (Math.abs(point.y - point.homeY) > 11) point.vy *= -1;
+
+        const dx = cursor.x - point.x;
+        const dy = cursor.y - point.y;
+        const distance = Math.hypot(dx, dy);
+        if (distance < 125) {
+          point.x -= dx * 0.00065;
+          point.y -= dy * 0.00065;
         }
       }
 
-      for (let j = i + 1; j < nodes.length; j++) {
-        const b = nodes[j];
-        const dx = a.x - b.x;
-        const dy = a.y - b.y;
-        const d = Math.hypot(dx, dy);
-        if (d < 88) {
-          const alpha = (1 - d / 88) * 0.17;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = `rgba(110, 209, 226, ${alpha})`;
-          ctx.lineWidth = 0.7;
-          ctx.stroke();
-        }
+      for (let j = i + 1; j < points.length; j++) {
+        const other = points[j];
+        const dx = point.x - other.x;
+        const dy = point.y - other.y;
+        const distance = Math.hypot(dx, dy);
+        if (distance > 86) continue;
+
+        const alpha = (1 - distance / 86) * 0.14;
+        ctx.beginPath();
+        ctx.moveTo(point.x, point.y);
+        ctx.lineTo(other.x, other.y);
+        ctx.strokeStyle = `rgba(150, 214, 220, ${alpha})`;
+        ctx.lineWidth = 0.65;
+        ctx.stroke();
       }
     }
 
-    nodes.forEach((n, i) => {
-      const pulse = reduceMotion ? 1 : 0.82 + Math.sin(time * 0.0015 + i) * 0.18;
+    points.forEach((point, index) => {
+      const pulse = reduced ? 1 : 0.86 + Math.sin(time * 0.00135 + index * 0.61) * 0.14;
       ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r * pulse, 0, Math.PI * 2);
-      ctx.fillStyle = i % 9 === 0 ? 'rgba(185,255,74,.82)' : 'rgba(191,224,231,.45)';
+      ctx.arc(point.x, point.y, point.radius * pulse, 0, Math.PI * 2);
+      ctx.fillStyle = point.hot ? 'rgba(186,248,74,.82)' : 'rgba(196,218,222,.42)';
       ctx.fill();
     });
 
-    const g = ctx.createRadialGradient(width * .52, height * .48, 8, width * .52, height * .48, 190);
-    g.addColorStop(0, 'rgba(185,255,74,.035)');
-    g.addColorStop(.55, 'rgba(88,231,255,.025)');
-    g.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = g;
+    const glow = ctx.createRadialGradient(width * .51, height * .50, 6, width * .51, height * .50, 210);
+    glow.addColorStop(0, 'rgba(186,248,74,.026)');
+    glow.addColorStop(.48, 'rgba(142,231,242,.022)');
+    glow.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = glow;
     ctx.fillRect(0, 0, width, height);
 
-    if (!reduceMotion) requestAnimationFrame(draw);
+    if (!reduced) requestAnimationFrame(render);
   }
 
-  canvas.addEventListener('pointermove', (e) => {
+  canvas.addEventListener('pointermove', (event) => {
     const rect = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
+    cursor.x = event.clientX - rect.left;
+    cursor.y = event.clientY - rect.top;
   }, { passive: true });
 
   canvas.addEventListener('pointerleave', () => {
-    mouse.x = -9999;
-    mouse.y = -9999;
+    cursor.x = -10000;
+    cursor.y = -10000;
   });
 
-  const ro = new ResizeObserver(resize);
-  ro.observe(canvas);
-  resize();
-  draw();
-
-  const countTargets = [...document.querySelectorAll('[data-count]')];
-  if (!reduceMotion && 'IntersectionObserver' in window) {
-    const countIO = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const target = Number(el.dataset.count || 0);
-        const start = performance.now();
-        const duration = 700;
-        const tick = (now) => {
-          const t = Math.min((now - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - t, 3);
-          el.textContent = String(Math.max(1, Math.round(target * eased)));
-          if (t < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-        countIO.unobserve(el);
-      });
-    }, { threshold: .7 });
-    countTargets.forEach((el) => countIO.observe(el));
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(setup).observe(canvas);
+  } else {
+    window.addEventListener('resize', setup, { passive: true });
   }
+
+  setup();
+  render();
 })();
