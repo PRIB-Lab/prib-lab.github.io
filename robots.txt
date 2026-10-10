@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prib-lab.github.io/sitemap.xml
