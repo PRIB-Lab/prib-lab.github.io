@@ -176,7 +176,7 @@ button,a{tap-highlight-color:transparent}
 }
 .dark-card{background:linear-gradient(160deg,#15191e,#0f1216)}
 .accent-card{background:var(--lime);color:#0a0d0e;border-color:transparent}
-.card-index{position:absolute;align-self:flex-start;margin-bottom:auto;top:auto;font-size:10px;color:#727c86}
+.card-index{position:absolute;left:24px;top:24px;font-size:10px;color:#727c86}
 .accent-card .card-index{color:#345015}
 .statement-card h3{font-size:28px;margin-bottom:12px}
 .statement-card p{font-size:14px}
