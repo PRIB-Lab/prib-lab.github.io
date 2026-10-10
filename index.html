@@ -3,423 +3,299 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="PRIB builds reliability infrastructure for AI-driven protein engineering — evaluating stability, aggregation, conformational drift and process stress before expensive wet-lab development." />
-  <meta name="theme-color" content="#0b0d0f" />
+  <meta name="description" content="PRIB develops reliability infrastructure for protein engineering: computational screening for stability, aggregation, conformational drift and process stress before expensive experimental development." />
+  <meta name="theme-color" content="#090b0d" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>PRIB — Protein Reliability Infrastructure</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <div class="noise" aria-hidden="true"></div>
-  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="pointer-light" aria-hidden="true"></div>
 
-  <header class="nav-shell">
+  <header class="site-header">
     <nav class="nav container" aria-label="Primary">
       <a class="brand" href="#top" aria-label="PRIB home">
         <span class="brand-mark">P</span>
-        <span class="brand-word">PRIB</span>
+        <span class="brand-name">PRIB</span>
       </a>
-
       <div class="nav-links">
         <a href="#system">System</a>
-        <a href="#signals">Signals</a>
         <a href="#research">Research</a>
-        <a href="#team">Team</a>
+        <a href="#updates">Updates</a>
+        <a href="#people">People</a>
       </div>
-
-      <a class="nav-cta" href="#contact">Collaborate <span>↗</span></a>
+      <a class="nav-contact" href="#contact">Contact <span>↗</span></a>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero container">
       <div class="hero-copy reveal">
-        <div class="eyebrow"><span class="live-dot"></span> Protein reliability infrastructure</div>
-        <h1>
-          Design is only<br />
-          <span class="accent-text">the beginning.</span>
-        </h1>
-        <p class="hero-deck">
-          AI can generate more protein candidates than teams can afford to test.
-          PRIB is the engineering layer that helps decide <strong>which ones deserve the next experiment.</strong>
+        <div class="eyebrow">
+          <span class="status-dot"></span>
+          Protein reliability / decision infrastructure
+        </div>
+        <h1>Know what to<br><span>test next.</span></h1>
+        <p class="hero-intro">
+          PRIB evaluates protein candidates for failure-relevant risk before expensive experimental development.
+          Stability, aggregation, conformational drift and process stress become signals for a better next decision.
         </p>
-
         <div class="hero-actions">
-          <a class="button button-primary" href="#system">Explore the system <span>→</span></a>
-          <a class="button button-ghost" href="#research">See research momentum</a>
-        </div>
-
-        <div class="hero-proof">
-          <div>
-            <span class="proof-value">Failure-first</span>
-            <span class="proof-label">evaluation philosophy</span>
-          </div>
-          <div>
-            <span class="proof-value">Physics-aware</span>
-            <span class="proof-label">risk interpretation</span>
-          </div>
-          <div>
-            <span class="proof-value">Workflow-ready</span>
-            <span class="proof-label">for real R&amp;D pipelines</span>
-          </div>
+          <a class="button primary" href="#system">See the system <span>→</span></a>
+          <a class="text-link" href="#updates">Recent updates <span>↘</span></a>
         </div>
       </div>
 
-      <div class="hero-visual reveal delay-1" aria-label="Illustrative protein reliability risk field">
-        <canvas id="riskField"></canvas>
-
-        <div class="visual-topline">
-          <span>PRIB / RELIABILITY FIELD</span>
-          <span class="mono dim">LIVE MODEL VIEW</span>
+      <div class="hero-stage reveal delay-1">
+        <canvas id="field" aria-label="Abstract protein reliability field visualization"></canvas>
+        <div class="stage-top mono">
+          <span>RELIABILITY FIELD / 01</span>
+          <span class="muted">MODEL VIEW</span>
         </div>
 
-        <div class="candidate-card glass">
-          <div class="candidate-head">
-            <span class="mono dim">CANDIDATE_07</span>
-            <span class="status-pill">PRIORITIZE</span>
+        <div class="stage-crosshair" aria-hidden="true"></div>
+
+        <div class="readout">
+          <div class="readout-top mono">
+            <span>CANDIDATE / 074</span>
+            <span>SCREEN</span>
           </div>
-          <div class="score-row">
-            <span class="score">18</span>
+          <div class="readout-score">
+            <strong>18</strong>
             <div>
-              <span class="score-label">relative failure risk</span>
-              <span class="score-note">lower is better</span>
+              <span>relative risk</span>
+              <small>lower is better</small>
             </div>
           </div>
-          <div class="bars">
-            <div class="bar-row">
-              <span>Aggregation</span>
-              <div class="bar"><i style="--v: 21%"></i></div>
-              <b>21</b>
-            </div>
-            <div class="bar-row">
-              <span>Scale-up</span>
-              <div class="bar"><i style="--v: 16%"></i></div>
-              <b>16</b>
-            </div>
-            <div class="bar-row">
-              <span>Stability</span>
-              <div class="bar"><i style="--v: 19%"></i></div>
-              <b>19</b>
-            </div>
+          <div class="axis-list mono">
+            <div><span>AGG</span><i><b style="--p:22%"></b></i><em>22</em></div>
+            <div><span>STB</span><i><b style="--p:16%"></b></i><em>16</em></div>
+            <div><span>PRC</span><i><b style="--p:19%"></b></i><em>19</em></div>
           </div>
         </div>
 
-        <div class="visual-caption mono">
+        <div class="stage-bottom mono">
           <span>SEQUENCE → PERTURB → SCORE → DECIDE</span>
-          <span>01.27 ms</span>
+          <span>PRIB / 2026</span>
         </div>
       </div>
     </section>
 
-    <section class="ticker" aria-label="PRIB principles">
-      <div class="ticker-track">
-        <span>FAILURE-FIRST</span><i>◆</i>
-        <span>PERTURBATION-AWARE</span><i>◆</i>
-        <span>PHYSICS-INFORMED</span><i>◆</i>
-        <span>INDUSTRIAL DECISION SUPPORT</span><i>◆</i>
-        <span>FAILURE-FIRST</span><i>◆</i>
-        <span>PERTURBATION-AWARE</span><i>◆</i>
-        <span>PHYSICS-INFORMED</span><i>◆</i>
-        <span>INDUSTRIAL DECISION SUPPORT</span><i>◆</i>
+    <section class="thesis">
+      <div class="container thesis-grid reveal">
+        <div class="section-label mono">01 / THESIS</div>
+        <h2>Protein design is scaling.<br>Selection has to keep up.</h2>
+        <p>
+          Candidate generation is becoming cheap and abundant. Experimental capacity is not.
+          PRIB is built for the narrowing step: identify risk early, rank candidates clearly,
+          and reserve wet-lab effort for the sequences that justify it.
+        </p>
       </div>
     </section>
 
-    <section class="problem section container reveal">
-      <div class="section-kicker mono">01 / WHY NOW</div>
-      <div class="split-heading">
-        <h2>Generation got faster.<br />Reliability didn't.</h2>
-        <div class="split-copy">
+    <section id="system" class="section system container">
+      <div class="section-label mono reveal">02 / SYSTEM</div>
+      <div class="section-head reveal">
+        <h2>Reliability, upstream.</h2>
+        <p>
+          A compact screening layer between protein design and experimental commitment.
+          The output is a decision surface, not another pile of scores.
+        </p>
+      </div>
+
+      <div class="flow reveal">
+        <article>
+          <span class="flow-index mono">01</span>
+          <div class="flow-line"><i></i></div>
+          <h3>Represent</h3>
+          <p>Sequence, structure and experimental context become reliability-aware features.</p>
+        </article>
+        <article>
+          <span class="flow-index mono">02</span>
+          <div class="flow-line"><i></i></div>
+          <h3>Stress</h3>
+          <p>Perturbation-aware analysis surfaces failure-relevant behavior that static plausibility can miss.</p>
+        </article>
+        <article>
+          <span class="flow-index mono">03</span>
+          <div class="flow-line"><i></i></div>
+          <h3>Prioritize</h3>
+          <p>Candidate ranking and interpretable risk drivers support review, go and stop decisions.</p>
+        </article>
+      </div>
+
+      <div class="workbench reveal">
+        <div class="workbench-copy">
+          <span class="mono micro">ENGINEERING VIEW</span>
+          <h3>Built for candidate libraries.</h3>
           <p>
-            Protein design systems are getting exceptionally good at producing candidates that look plausible.
-            The bottleneck is moving downstream — into stability, aggregation, processability, formulation and the
-            long tail of failure modes that are expensive to discover late.
+            PRIB is designed around batch evaluation, reproducible compute and clear hand-off into existing R&amp;D workflows.
           </p>
-          <p>
-            PRIB treats those failure modes as first-class engineering signals.
-          </p>
+          <div class="workbench-tags mono">
+            <span>BATCH</span><span>API-READY</span><span>EXPLAINABLE</span><span>MODEL-AGNOSTIC</span>
+          </div>
+        </div>
+        <div class="matrix" aria-label="Illustrative candidate risk matrix">
+          <div class="matrix-head mono"><span>ID</span><span>AGG</span><span>STB</span><span>PRC</span><span>DECISION</span></div>
+          <div class="matrix-row"><span>P_031</span><i class="v1"></i><i class="v2"></i><i class="v1"></i><b>PRIORITIZE</b></div>
+          <div class="matrix-row"><span>P_074</span><i class="v2"></i><i class="v1"></i><i class="v2"></i><b>PRIORITIZE</b></div>
+          <div class="matrix-row"><span>P_105</span><i class="v3"></i><i class="v2"></i><i class="v4"></i><b class="review">REVIEW</b></div>
+          <div class="matrix-row"><span>P_148</span><i class="v4"></i><i class="v3"></i><i class="v4"></i><b class="drop">DROP</b></div>
+          <div class="matrix-row faded"><span>P_216</span><i class="v2"></i><i class="v2"></i><i class="v3"></i><b>PRIORITIZE</b></div>
         </div>
       </div>
-
-      <div class="statement-grid">
-        <article class="statement-card dark-card">
-          <span class="card-index mono">01</span>
-          <h3>Not another generator.</h3>
-          <p>PRIB sits after design and prediction, before expensive experimental commitment.</p>
-        </article>
-        <article class="statement-card dark-card">
-          <span class="card-index mono">02</span>
-          <h3>Not a prettier structure score.</h3>
-          <p>We focus on latent failure pathways that static plausibility can miss.</p>
-        </article>
-        <article class="statement-card accent-card">
-          <span class="card-index mono">03</span>
-          <h3>A decision layer.</h3>
-          <p>Rank, eliminate, explain — and spend wet-lab resources where they matter most.</p>
-        </article>
-      </div>
     </section>
 
-    <section id="system" class="system section">
+    <section id="research" class="section research">
       <div class="container">
-        <div class="section-kicker mono reveal">02 / SYSTEM</div>
-        <div class="system-title reveal">
-          <h2>A reliability stack<br />built for the messy part.</h2>
+        <div class="section-label mono reveal">03 / RESEARCH</div>
+        <div class="section-head reveal">
+          <h2>Physics in the loop.</h2>
           <p>
-            Sequence and structure go in. Decision-relevant risk comes out.
-            The system is modular by design: interpretable where possible, learned where useful,
-            and always oriented toward downstream action.
+            The research program combines protein biophysics, mechanics and machine learning.
+            The focus stays on failure modes that matter in real development workflows.
           </p>
         </div>
 
-        <div class="pipeline reveal">
-          <div class="pipe-node">
-            <div class="node-top"><span>01</span><i></i></div>
-            <h3>Represent</h3>
-            <p>Sequence, structure and context become reliability-aware features.</p>
-            <div class="node-tags"><span>sequence</span><span>structure</span><span>context</span></div>
-          </div>
-          <div class="pipe-connector" aria-hidden="true"><span>→</span></div>
-          <div class="pipe-node">
-            <div class="node-top"><span>02</span><i></i></div>
-            <h3>Stress</h3>
-            <p>Evaluate candidate behavior through perturbation and failure-oriented criteria.</p>
-            <div class="node-tags"><span>perturbation</span><span>failure modes</span><span>physics</span></div>
-          </div>
-          <div class="pipe-connector" aria-hidden="true"><span>→</span></div>
-          <div class="pipe-node">
-            <div class="node-top"><span>03</span><i></i></div>
-            <h3>Decide</h3>
-            <p>Return ranked candidates, risk drivers and go / review / stop decisions.</p>
-            <div class="node-tags"><span>ranking</span><span>explanation</span><span>action</span></div>
-          </div>
-        </div>
-
-        <div class="terminal-wrap reveal">
-          <div class="terminal">
-            <div class="terminal-bar">
-              <div><i></i><i></i><i></i></div>
-              <span>prib / batch-screen</span>
-              <span>secure local session</span>
-            </div>
-            <pre><code><span class="code-dim">$</span> prib evaluate candidates.fasta <span class="code-dim">--profile developability</span>
-
-<span class="code-cyan">INGEST</span>      2,048 candidates
-<span class="code-cyan">ASSESS</span>      perturbation-aware reliability axes
-<span class="code-cyan">RANK</span>        failure risk + wet-lab priority
-<span class="code-cyan">EXPLAIN</span>     top contributing risk drivers
-
-<span class="code-green">✓</span>  184 prioritize
-<span class="code-amber">•</span>  913 review
-<span class="code-red">×</span>  951 deprioritize
-
-<span class="code-dim">Output written to /results/prib_screen_01</span></code></pre>
-          </div>
-
-          <div class="terminal-notes">
-            <div>
-              <span class="mono">BATCH-FIRST</span>
-              <p>Designed for candidate libraries, not one-off demos.</p>
-            </div>
-            <div>
-              <span class="mono">MODEL-AGNOSTIC</span>
-              <p>Works downstream of existing design and structure pipelines.</p>
-            </div>
-            <div>
-              <span class="mono">HUMAN-READABLE</span>
-              <p>Outputs are made for experimental and R&amp;D decisions.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="signals" class="signals section container">
-      <div class="section-kicker mono reveal">03 / SIGNALS</div>
-      <div class="split-heading reveal">
-        <h2>We look for what<br />breaks later.</h2>
-        <div class="split-copy">
-          <p>
-            Reliability is not one metric. PRIB combines multiple failure-relevant views into a
-            decision surface that reflects how proteins behave beyond idealized conditions.
-          </p>
-        </div>
-      </div>
-
-      <div class="signal-grid">
-        <article class="signal-card reveal">
-          <span class="signal-icon">A1</span>
-          <h3>Aggregation</h3>
-          <p>Self-association, hydrophobic exposure and sequence-level liabilities.</p>
-          <div class="spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        </article>
-        <article class="signal-card reveal delay-1">
-          <span class="signal-icon">S2</span>
-          <h3>Stability</h3>
-          <p>Absolute and perturbation-induced movement across stability landscapes.</p>
-          <div class="spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        </article>
-        <article class="signal-card reveal delay-2">
-          <span class="signal-icon">C3</span>
-          <h3>Conformational drift</h3>
-          <p>Signals of excessive lability, weak constraints and unstable state transitions.</p>
-          <div class="spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        </article>
-        <article class="signal-card reveal">
-          <span class="signal-icon">P4</span>
-          <h3>Process stress</h3>
-          <p>Risk under production, handling and non-ideal environmental conditions.</p>
-          <div class="spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        </article>
-        <article class="signal-card reveal delay-1">
-          <span class="signal-icon">L5</span>
-          <h3>Chemical liabilities</h3>
-          <p>Interpretable sequence motifs and context-sensitive degradation proxies.</p>
-          <div class="spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        </article>
-        <article class="signal-card reveal delay-2">
-          <span class="signal-icon">D6</span>
-          <h3>Developability risk</h3>
-          <p>A practical view that connects computational signals with experimental effort.</p>
-          <div class="spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="principle section">
-      <div class="container">
-        <div class="principle-block reveal">
-          <span class="mono">PRIB PRINCIPLE / 001</span>
-          <blockquote>
-            “A protein that looks right<br />
-            can still fail in the real world.”
-          </blockquote>
-          <p>
-            We build for that gap — between computational plausibility and physical reliability.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="research" class="research section container">
-      <div class="section-kicker mono reveal">04 / RESEARCH MOMENTUM</div>
-      <div class="split-heading reveal">
-        <h2>Scientific depth.<br />Engineering velocity.</h2>
-        <div class="split-copy">
-          <p>
-            PRIB combines biophysics, mechanics and modern machine learning with the execution
-            discipline required to turn research ideas into reproducible systems.
-          </p>
-        </div>
-      </div>
-
-      <div class="momentum-grid">
-        <article class="momentum-card large reveal">
-          <div class="momentum-label mono">NEURIPS 2026</div>
-          <div class="momentum-number" data-count="4">4</div>
-          <h3>accepted workshop works</h3>
-          <p>
-            Research across agentic life science, physical-world intelligence, robotics and world modeling —
-            reflecting the team's broader interest in reliable AI systems that operate beyond clean benchmarks.
-          </p>
-        </article>
-
-        <article class="momentum-card reveal delay-1">
-          <div class="momentum-label mono">HESSIAN.AI</div>
-          <div class="momentum-symbol">↗</div>
-          <h3>LAISF selected</h3>
-          <p>Supported within the hessian.AI startup ecosystem for translating AI research into real applications.</p>
-        </article>
-
-        <article class="momentum-card reveal delay-2">
-          <div class="momentum-label mono">COMPUTE</div>
-          <div class="momentum-symbol">∞</div>
-          <h3>Large-scale workflows</h3>
-          <p>Reproducible GPU pipelines for perturbation scoring, representation learning and benchmark evaluation.</p>
-        </article>
-
-        <article class="momentum-card wide reveal">
-          <div class="momentum-label mono">OPERATING MODE</div>
-          <div class="operating-row">
-            <span>Research</span><i></i><span>Benchmark</span><i></i><span>Prototype</span><i></i><span>Industry</span>
-          </div>
-          <p>
-            We care about the full path from a scientific question to something another team can actually use.
-          </p>
-        </article>
-      </div>
-
-      <p class="disclosure mono reveal">
-        PUBLIC SITE NOTE — Internal benchmarks, partner-specific data, compute credentials and unpublished model details are intentionally not exposed here.
-      </p>
-    </section>
-
-    <section id="team" class="team section">
-      <div class="container">
-        <div class="section-kicker mono reveal">05 / TEAM</div>
-        <div class="team-heading reveal">
-          <h2>Built across physics,<br />AI and translation.</h2>
-          <p>
-            PRIB is intentionally interdisciplinary: protein biophysics defines the failure problem,
-            mechanics and machine learning make it computable, and product thinking keeps the output useful.
-          </p>
-        </div>
-
-        <div class="team-grid">
-          <article class="person reveal">
-            <div class="person-top">
-              <div class="avatar">HL</div>
-              <span class="mono">FOUNDER / SCIENCE</span>
-            </div>
-            <h3>Dr. Haipei Liu</h3>
-            <p class="role">Founder &amp; CEO · Protein biophysics</p>
-            <p>
-              Former Senior Scientist with ETH Zurich / University of Basel experience.
-              Focused on protein mechanics, single-molecule biophysics and reliability under perturbation.
-            </p>
+        <div class="research-lines">
+          <article class="research-line reveal">
+            <span class="mono">A</span>
+            <h3>Stability &amp; perturbation</h3>
+            <p>Sequence-level stability signals, mutation response and reliability under changing conditions.</p>
+            <span class="arrow">↗</span>
           </article>
+          <article class="research-line reveal">
+            <span class="mono">B</span>
+            <h3>Aggregation &amp; developability</h3>
+            <p>Early risk signals that can help remove expensive dead ends from candidate portfolios.</p>
+            <span class="arrow">↗</span>
+          </article>
+          <article class="research-line reveal">
+            <span class="mono">C</span>
+            <h3>Failure-aware representations</h3>
+            <p>Learned representations shaped around robustness, transition behavior and decision relevance.</p>
+            <span class="arrow">↗</span>
+          </article>
+        </div>
 
-          <article class="person reveal delay-1">
-            <div class="person-top">
-              <div class="avatar">XP</div>
-              <span class="mono">CO-FOUNDER / AI</span>
+        <div class="research-note reveal mono">
+          PUBLIC VIEW / METHODS ARE SHOWN AT SYSTEM LEVEL. PARTNER DATA, INTERNAL BENCHMARKS, COMPUTE DETAILS AND UNPUBLISHED IMPLEMENTATION ARE KEPT PRIVATE.
+        </div>
+      </div>
+    </section>
+
+    <section id="updates" class="section updates container">
+      <div class="section-label mono reveal">04 / UPDATES</div>
+      <div class="updates-head reveal">
+        <h2>Recent signals.</h2>
+        <p>Selected milestones from research, ecosystem and industry engagement.</p>
+      </div>
+
+      <div class="update-list">
+        <article class="update-row reveal">
+          <time class="mono">OCT 2026</time>
+          <div>
+            <span class="update-type mono">INDUSTRY</span>
+            <h3>Invited talk at Festival of Biologics Basel</h3>
+            <p>PRIB will join the downstream-processing program for an industry-facing discussion on protein reliability and development risk.</p>
+          </div>
+          <span class="update-mark">↗</span>
+        </article>
+
+        <article class="update-row reveal">
+          <time class="mono">SEP 2026</time>
+          <div>
+            <span class="update-type mono">RESEARCH</span>
+            <h3>Four works accepted to NeurIPS 2026 workshops</h3>
+            <p>AgenticLS · ESR · PhysWorldAI · Robotics World Modeling.</p>
+          </div>
+          <span class="update-mark">04</span>
+        </article>
+
+        <article class="update-row reveal">
+          <time class="mono">SEP 2026</time>
+          <div>
+            <span class="update-type mono">ECOSYSTEM</span>
+            <h3>Selected for hessian.AI LAISF 2026/27</h3>
+            <p>Six months of focused validation across technology, product and market.</p>
+          </div>
+          <span class="update-mark">H</span>
+        </article>
+
+        <article class="update-row reveal">
+          <time class="mono">SEP 2026</time>
+          <div>
+            <span class="update-type mono">COMPUTE</span>
+            <h3>Anthropic support for ongoing protein-design research</h3>
+            <p>Additional research compute extends the team's capacity for model-assisted protein engineering work.</p>
+          </div>
+          <span class="update-mark">A</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="people" class="section people">
+      <div class="container">
+        <div class="section-label mono reveal">05 / PEOPLE</div>
+        <div class="people-intro reveal">
+          <h2>Built by scientists<br>and operators.</h2>
+          <p>
+            Protein biophysics anchors the technical thesis. Product and business development keep the work connected to real industrial decisions.
+          </p>
+        </div>
+
+        <div class="people-group reveal">
+          <div class="group-title mono">FOUNDING TEAM</div>
+          <div class="founder-grid">
+            <article class="person">
+              <div class="person-id mono">HL / 01</div>
+              <h3>Dr. Haipei Liu</h3>
+              <p class="role">Founder &amp; CEO · Protein biophysics</p>
+              <p>
+                Former Senior Scientist at ETH Zurich / University of Basel. Research background in protein mechanics,
+                single-molecule biophysics and quantitative analysis of biomolecular stability.
+              </p>
+            </article>
+            <article class="person">
+              <div class="person-id mono">BZ / 02</div>
+              <h3>Bingyi Zhao</h3>
+              <p class="role">Co-Founder · Business Development &amp; Product</p>
+              <p>
+                Industrial engineering and management background spanning technology consulting,
+                product strategy, international business development and research-to-market translation.
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <div class="people-group research-team reveal">
+          <div class="group-title mono">RESEARCH TEAM</div>
+          <div class="research-person">
+            <div>
+              <div class="person-id mono">XP / R01</div>
+              <h3>Dr. Xianglong Peng</h3>
+              <p class="role">Researcher · Mechanics &amp; machine learning</p>
             </div>
-            <h3>Dr. Xianglong Peng</h3>
-            <p class="role">Scientific Lead · Physics-informed AI</p>
             <p>
               Researcher at TU Darmstadt with a background in solid mechanics, nonlinear systems,
-              computational modeling and deep learning.
+              computational modeling and physics-informed machine learning.
             </p>
-          </article>
-
-          <article class="person reveal delay-2">
-            <div class="person-top">
-              <div class="avatar">BZ</div>
-              <span class="mono">CO-FOUNDER / MARKET</span>
-            </div>
-            <h3>Bingyi Zhao</h3>
-            <p class="role">Business Development &amp; Product</p>
-            <p>
-              Industrial engineering and management background spanning technology consulting,
-              product strategy, international BD and research-to-market translation.
-            </p>
-          </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="contact section container">
-      <div class="contact-card reveal">
-        <div>
-          <span class="section-kicker mono">06 / COLLABORATE</span>
-          <h2>Building proteins?<br />Let's talk about what fails.</h2>
-        </div>
-        <div class="contact-side">
+    <section id="contact" class="contact container">
+      <div class="contact-inner reveal">
+        <span class="section-label mono">06 / CONTACT</span>
+        <h2>Working on protein<br>development at scale?</h2>
+        <div class="contact-bottom">
           <p>
-            We are interested in research collaborations, benchmark partnerships and industry
-            conversations around protein reliability, developability and AI-enabled engineering.
+            We are open to research collaborations, benchmark partnerships and industry conversations around protein reliability and developability.
           </p>
-          <a class="button button-primary" href="https://github.com/PRIB-Lab" rel="noopener noreferrer">
+          <a class="button primary" href="https://github.com/PRIB-Lab" rel="noopener noreferrer">
             PRIB Lab on GitHub <span>↗</span>
           </a>
         </div>
@@ -427,19 +303,16 @@
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <a class="brand footer-brand" href="#top">
-          <span class="brand-mark">P</span>
-          <span class="brand-word">PRIB</span>
-        </a>
-        <p>Reliability infrastructure for protein engineering.</p>
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-mark">P</span>
+        <div><strong>PRIB</strong><small>Protein reliability infrastructure</small></div>
       </div>
       <div class="footer-meta mono">
         <span>FRANKFURT / DARMSTADT</span>
-        <span>© 2026 PRIB LAB</span>
         <span>NO TRACKERS · NO COOKIES</span>
+        <span>© 2026 PRIB LAB</span>
       </div>
     </div>
   </footer>
