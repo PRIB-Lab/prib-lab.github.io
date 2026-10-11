@@ -1,4 +1,5 @@
 (() => {
+  document.documentElement.classList.add('js');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const header = document.querySelector('.site-header');
   const halo = document.querySelector('.cursor-halo');
@@ -13,6 +14,20 @@
       halo.style.top = event.clientY + 'px';
     }, { passive: true });
   }
+
+  const mobileMenu = document.querySelector('.mobile-menu');
+  document.querySelectorAll('.mobile-menu-panel a').forEach((link) => {
+    link.addEventListener('click', () => mobileMenu?.removeAttribute('open'));
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && mobileMenu?.open) {
+      mobileMenu.removeAttribute('open');
+      mobileMenu.querySelector('summary')?.focus();
+    }
+  });
+  document.addEventListener('pointerdown', (event) => {
+    if (mobileMenu?.open && !mobileMenu.contains(event.target)) mobileMenu.removeAttribute('open');
+  });
 
   const nodes = [...document.querySelectorAll('.reveal')];
   if (!reduced && 'IntersectionObserver' in window) {
