@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <a class="skip-link" href="#top">Skip to content</a>
   <div class="grain" aria-hidden="true"></div>
   <div class="cursor-halo" aria-hidden="true"></div>
 
@@ -26,11 +27,21 @@
         <a href="#updates">Updates</a>
         <a href="#people">People</a>
       </div>
-      <a class="nav-cta" href="#contact">Contact <span>↗</span></a>
+      <details class="mobile-menu">
+        <summary>Menu <span aria-hidden="true">⌄</span></summary>
+        <div class="mobile-menu-panel">
+          <a href="#system">System</a>
+          <a href="#research">Research</a>
+          <a href="#updates">Updates</a>
+          <a href="#people">People</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </details>
+      <a class="nav-cta" href="#contact">Contact <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
 
-  <main id="top">
+  <main id="top" tabindex="-1">
     <section class="hero container">
       <div class="hero-copy reveal">
         <div class="eyebrow mono"><span></span> COMPUTATIONAL RELIABILITY / PROTEIN ENGINEERING</div>
@@ -39,8 +50,8 @@
           PRIB is building a reliability layer for protein engineering — screening designed candidates for stability, aggregation and stress sensitivity before teams commit to expensive wet-lab work.
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="#system">Explore the system <span>→</span></a>
-          <a class="quiet-link" href="#updates">Recent updates <span>↘</span></a>
+          <a class="button primary" href="#system">Explore the system <span aria-hidden="true">→</span></a>
+          <a class="quiet-link" href="#updates">Recent updates <span aria-hidden="true">↘</span></a>
         </div>
         <div class="hero-meta mono">
           <span>FRANKFURT / DARMSTADT</span>
@@ -55,13 +66,13 @@
 
         <div class="stage-top mono">
           <span>PRIB / RELIABILITY FIELD</span>
-          <span class="dim">LIVE VIEW</span>
+          <span class="dim">CONCEPT VIEW</span>
         </div>
 
         <div class="readout">
           <div class="readout-head mono">
             <span>CANDIDATE 074</span>
-            <b>PRIORITY</b>
+            <b>DEMO DATA</b>
           </div>
           <div class="readout-main">
             <strong>18</strong>
@@ -123,7 +134,7 @@
 
       <div class="workbench reveal">
         <div class="workbench-copy">
-          <span class="mono micro">ENGINEERING VIEW</span>
+          <span class="mono micro">ILLUSTRATIVE ENGINEERING VIEW</span>
           <h3>Built around candidate libraries.</h3>
           <p>Batch evaluation, reproducible compute and clean hand-off into existing protein R&amp;D workflows.</p>
           <div class="tags mono"><span>BATCH</span><span>REPRODUCIBLE</span><span>EXPLAINABLE</span><span>MODEL-AGNOSTIC</span></div>
@@ -153,19 +164,19 @@
             <span class="mono">A</span>
             <h3>Stability &amp; perturbation</h3>
             <p>Sequence-level stability signals, mutation response and robustness under changing conditions.</p>
-            <i>↗</i>
+            <i aria-hidden="true">↗</i>
           </article>
           <article class="research-row reveal">
             <span class="mono">B</span>
             <h3>Aggregation &amp; developability</h3>
             <p>Early warning signals for candidate liabilities that can become expensive later in development.</p>
-            <i>↗</i>
+            <i aria-hidden="true">↗</i>
           </article>
           <article class="research-row reveal">
             <span class="mono">C</span>
             <h3>Failure-aware representations</h3>
             <p>Learned representations centered on robustness, transition behavior and decision relevance.</p>
-            <i>↗</i>
+            <i aria-hidden="true">↗</i>
           </article>
         </div>
       </div>
@@ -186,7 +197,7 @@
             <h3>Invited talk at Festival of Biologics Basel</h3>
             <p>PRIB joins the downstream-processing program for an industry discussion on protein reliability and development risk.</p>
           </div>
-          <span class="update-chip mono">↗</span>
+          <span class="update-chip mono" aria-hidden="true">↗</span>
         </article>
 
         <article class="update-row reveal">
@@ -267,7 +278,7 @@
           <span class="section-label mono">06 / CONTACT</span>
           <h2>Working on protein<br>development at scale?</h2>
           <p>We are open to research collaborations, benchmark partnerships and industry conversations around protein reliability and developability.</p>
-          <a class="button primary" href="https://github.com/PRIB-Lab" rel="noopener noreferrer">PRIB Lab on GitHub <span>↗</span></a>
+          <a class="button primary" href="https://github.com/PRIB-Lab" rel="noopener noreferrer">PRIB Lab on GitHub <span aria-hidden="true">↗</span></a>
         </div>
         <div class="contact-brand" aria-hidden="true">
           <div class="contact-logo-lockup"><img src="assets/prib-mark.svg" alt="" /><strong>PRIB</strong><span class="mono">AI LAB</span></div>
