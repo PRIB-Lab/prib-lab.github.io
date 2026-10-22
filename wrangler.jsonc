@@ -4,5 +4,15 @@
   "compatibility_date": "2026-10-22",
   "assets": {
     "directory": "./site"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "priblabs.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.priblabs.com",
+      "custom_domain": true
+    }
+  ]
 }
