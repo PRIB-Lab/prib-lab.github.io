@@ -1,0 +1,9 @@
+{
+  "name": "PRIB Labs",
+  "short_name": "PRIB Labs",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0d0f",
+  "theme_color": "#0b0d0f",
+  "icons": []
+}
