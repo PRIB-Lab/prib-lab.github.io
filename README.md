@@ -1,35 +1,48 @@
-# PRIB Lab website
+# PRIB Labs Website V1
 
-Official public website for **PRIB** — reliability infrastructure for protein engineering.
+A production-oriented single-page institutional website for **PRIB Labs**.
 
-## Positioning
+## Architecture
 
-PRIB is a failure-oriented evaluation layer for protein engineering workflows. The public site focuses on:
-
-- protein reliability and developability;
-- perturbation-aware, physics-informed evaluation;
-- decision support between protein design and expensive wet-lab work;
-- research-to-industry execution.
-
-The site intentionally does **not** expose internal benchmark tables, partner-specific information, compute credentials, unpublished model details, or operational infrastructure.
-
-## Stack
-
-This is a zero-dependency static site built for GitHub Pages:
-
-- semantic HTML;
-- responsive CSS;
-- lightweight vanilla JavaScript;
-- no trackers;
-- no cookies;
-- no third-party CDN or font dependency.
+- Static HTML/CSS/JavaScript
+- Original procedural Canvas molecular/topology hero
+- Cloudflare Workers Static Assets
+- Private GitHub repository as source of truth
+- No database, CMS, cookies, analytics, stock imagery, or external font/CDN dependency
 
 ## Local preview
 
-Open `index.html` directly, or serve the repository with any static server.
+```bash
+python3 -m http.server 8788 -d site
+```
 
-## Deployment
+Then open `http://localhost:8788`.
 
-Repository: `PRIB-Lab/prib-lab.github.io`
+## Cloudflare deployment
 
-Expected GitHub Pages URL: `https://prib-lab.github.io`
+Install dependencies once:
+
+```bash
+npm install
+```
+
+Authenticate and deploy:
+
+```bash
+npx wrangler login
+npm run deploy
+```
+
+For Cloudflare Git integration use the private GitHub repository and set the deploy command to:
+
+```bash
+npx wrangler deploy
+```
+
+No build command is needed because this version is intentionally static.
+
+Then in the Worker open **Settings → Domains & Routes → Add → Custom Domain** and add `priblabs.com`.
+
+## Public content guardrails
+
+Use **PRIB Labs** as the public brand. Do not expose private Gmail, server IPs, credentials, internal HPC paths, unpublished scientific details, or unverified customer/partnership claims.
